@@ -1,9 +1,11 @@
 import express from "express";
-import { User } from "./schema/user";
+import rootRouter from "./router";
 import sequelize from "./server";
 
 const app = express();
 const port = 4000;
+
+app.use("/api", rootRouter);
 
 const initApp = async () => {
   console.log("Testing the database connection..");
