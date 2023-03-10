@@ -1,10 +1,9 @@
 import { Router } from "express";
+import { createUser } from "../handlers/userHandlers";
 
 const userRouter = Router();
 
-userRouter.post("/", () => {
-  console.log("create user");
-});
+userRouter.post("/", createUser);
 userRouter.patch("/");
 userRouter.delete("/");
 userRouter.get("/");
