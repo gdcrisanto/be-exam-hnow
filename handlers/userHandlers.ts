@@ -5,7 +5,7 @@ interface UserT {
   fname: string;
   lname: string;
   address: string;
-  postCode: Number;
+  postCode: string;
   contactNo: string;
   email: string;
   username: string;

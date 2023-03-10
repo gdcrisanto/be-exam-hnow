@@ -15,7 +15,7 @@ export const User = sequelize.define("app_users", {
     allowNull: false,
   },
   postCode: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   contactNo: {
