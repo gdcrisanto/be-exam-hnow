@@ -13,6 +13,10 @@ interface UserT {
   id?: Number;
 }
 
+interface DeleteUserT {
+  id: Number[];
+}
+
 export const createUser = (req: Request, res: Response) => {
   const {
     fname,
@@ -100,6 +104,27 @@ export const updateUser = (req: Request, res: Response) => {
     .then((users) => {
       return res.json({
         users,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.json({
+        message: "Unable to update user",
+      });
+    });
+};
+
+export const deleteUser = (req: Request, res: Response) => {
+  const { id }: DeleteUserT = req.body;
+
+  User.destroy({
+    where: {
+      id,
+    },
+  })
+    .then(() => {
+      return res.json({
+        message: "Deleted user",
       });
     })
     .catch((error) => {
