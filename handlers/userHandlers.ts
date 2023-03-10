@@ -10,6 +10,7 @@ interface UserT {
   email: string;
   username: string;
   password: string;
+  id?: Number;
 }
 
 export const createUser = (req: Request, res: Response) => {
@@ -43,6 +44,68 @@ export const createUser = (req: Request, res: Response) => {
       console.log(error);
       return res.json({
         message: "Unable to create a user",
+      });
+    });
+};
+
+export const getUsers = (req: Request, res: Response) => {
+  User.findAll()
+    .then((users) => {
+      return res.json({
+        users,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.json({
+        message: "Unable to get users",
+      });
+    });
+};
+
+export const updateUser = (req: Request, res: Response) => {
+  const {
+    fname,
+    lname,
+    address,
+    postCode,
+    contactNo,
+    email,
+    username,
+    password,
+    id,
+  }: UserT = req.body;
+
+  const updatedUser = {
+    fname,
+    lname,
+    address,
+    postCode,
+    contactNo,
+    email,
+    username,
+    password,
+  };
+
+  User.update(
+    {
+      ...updatedUser,
+    },
+    {
+      where: {
+        id,
+      },
+    }
+  )
+    .then((users) => {
+      return res.json({
+        users,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.json({
+        message: "Unable to get users",
       });
     });
 };
